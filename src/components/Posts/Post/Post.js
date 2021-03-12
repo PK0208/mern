@@ -15,10 +15,22 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 
-//import { likePost, deletePost } from "../../../actions/posts";
+import { likePost, deletePost } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const postDelete = (id) => {
+    console.log("Deletepost", id);
+    dispatch(deletePost(post._id));
+    _refreshPage();
+  };
+
+  const _refreshPage = () => {
+    console.log("Clicked");
+    window.location.reload();
+  };
 
   return (
     <Card className={classes.card}>
@@ -67,14 +79,14 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
-          //onClick={() => dispatch(likePost(post._id))}
+          onClick={() => dispatch(likePost(post._id))}
         >
           <ThumbUpAltIcon fontSize="small" /> Like {post.likeCount}{" "}
         </Button>
         <Button
           size="small"
           color="primary"
-          //onClick={() => dispatch(deletePost(post._id))}
+          onClick={() => postDelete(post._id)}
         >
           <DeleteIcon fontSize="small" /> Delete
         </Button>

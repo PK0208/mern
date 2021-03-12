@@ -35,9 +35,26 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
       dispatch(createPost(postData));
     }
+
+    clear();
+    _refreshPage();
   };
 
-  const clear = () => {};
+  const _refreshPage = () => {
+    console.log("Clicked");
+    window.location.reload();
+  };
+
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
   return (
     <Paper className={classes.paper}>
       <form autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
